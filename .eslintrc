@@ -1,0 +1,19 @@
+{
+	"globals": {
+		"jest": true
+	},
+	"extends": [
+		"nti-codestyle-js"
+	],
+
+	"env": {
+		"node": true,
+		"jest": true,
+		"browser": false,
+		"jasmine": false,
+		"mocha": false,
+		"es6": true
+	},
+
+	"parser": "babel-eslint"
+}

@@ -1,0 +1,39 @@
+{
+	"compact": false,
+	"env": {
+		"development": {
+			"presets": [
+				["env", {
+					"targets": {
+						"node": "current"
+					}
+				}],
+				"stage-1"
+			]
+		},
+		"test": {
+			"presets": [
+				["env", {
+					"targets": {
+						"node": "current"
+					}
+				}],
+				"stage-1"
+			]
+		},
+		"rollup": {
+			"presets": [
+				["env", {
+					"targets": {
+						"browsers": ["> 1%", "last 2 versions"]
+					},
+					"modules": false
+				}],
+				"stage-1"
+			],
+			"plugins": [
+				"external-helpers"
+			]
+		}
+	}
+}
