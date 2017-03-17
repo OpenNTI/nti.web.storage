@@ -15,10 +15,9 @@ check:
 	@eslint --ext .js,.jsx ./src
 
 test: node_modules check
-	@JEST_JUNIT_OUTPUT="$(REPORTS)/test-results/index.xml" jest --coverage
+	@jest
 
 clean:
-	@rm -f junit.xml
 	@rm -rf $(REPORTS)
 	@rm -rf $(LIBDIR)
 
