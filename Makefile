@@ -22,4 +22,4 @@ clean:
 	@rm -rf $(LIBDIR)
 
 lib: clean
-	@NODE_ENV=rollup rollup -c
+	@rollup -c

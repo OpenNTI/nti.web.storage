@@ -1,16 +1,6 @@
 {
 	"compact": false,
 	"env": {
-		"development": {
-			"presets": [
-				["env", {
-					"targets": {
-						"node": "current"
-					}
-				}],
-				"stage-1"
-			]
-		},
 		"test": {
 			"presets": [
 				["env", {
@@ -21,7 +11,7 @@
 				"stage-1"
 			]
 		},
-		"rollup": {
+		"development": {
 			"presets": [
 				["env", {
 					"targets": {
