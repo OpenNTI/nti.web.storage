@@ -6,15 +6,14 @@ LIBDIR = lib
 all: node_modules lib
 
 node_modules: package.json
-#	@rm -rf node_modules
-#	@npm install
-	@npm update
+	@rm -rf node_modules
+	@npm install
 	@touch $@
 
 check:
 	@eslint --ext .js,.jsx ./src
 
-test: node_modules check
+test: node_modules clean check
 	@jest
 
 clean:
