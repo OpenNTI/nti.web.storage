@@ -1,3 +1,4 @@
+/* eslint-env jest */
 import DefaultStorage, {LocalStorage, SessionStorage} from '../index';
 
 const Storage = DefaultStorage;
