@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/NextThought/nti.web.storage#readme",
   "devDependencies": {
-    "nti-lib-scripts": "^1.0.34"
+    "nti-lib-scripts": "^1.0.36"
   },
   "dependencies": {
     "nti-util-logger": "^1.1.1"
