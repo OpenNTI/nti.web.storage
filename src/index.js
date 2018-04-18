@@ -1,6 +1,6 @@
 import EventEmitter from 'events';
 
-import Logger from 'nti-util-logger';
+import Logger from '@nti/util-logger';
 
 const logger = Logger.get('nti:storage');
 

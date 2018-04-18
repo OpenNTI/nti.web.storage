@@ -1,5 +1,5 @@
 {
-  "name": "nti-web-storage",
+  "name": "@nti/web-storage",
   "version": "1.2.0-alpha",
   "description": "(Session|Local)Storage Abstraction",
   "main": "lib/index.js",
@@ -36,6 +36,6 @@
     "nti-lib-scripts": "^1.0.36"
   },
   "dependencies": {
-    "nti-util-logger": "^1.1.1"
+    "@nti/util-logger": "^1.1.1"
   }
 }
