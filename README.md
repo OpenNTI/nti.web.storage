@@ -1,7 +1,7 @@
 # nti.web.storage
 
 ```bash
-npm install nti-web-storage --save-dev
+npm install @nti/web-storage
 ```
 
 Provides a safe wrapper around the browser's Storage API.
