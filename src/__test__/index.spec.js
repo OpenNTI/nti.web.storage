@@ -84,3 +84,52 @@ test('Removing a value', () => {
 	Storage.removeItem('foo');
 	expect(Storage.getItem('foo')).toBeUndefined();
 });
+
+describe('scoped', () => {
+	const scoped = Storage.scope('scope');
+
+	let mocks = [];
+
+	beforeEach(() => {
+		mocks = [
+			jest.spyOn(Storage, 'setItem').mockImplementation(() => {}),
+			jest.spyOn(Storage, 'getItem').mockImplementation(() => {}),
+			jest.spyOn(Storage, 'removeItem').mockImplementation(() => {})
+		];
+	});
+
+
+	afterEach(() => {
+		for (let mock of mocks) {
+			mock.mockRestore();
+		}
+	});
+
+	test('setting', () => {
+		scoped.setItem('settingTest', 'bar');
+
+		expect(Storage.setItem).toHaveBeenCalledWith('scope-settingTest', 'bar');
+	});
+
+
+	test('getting', () => {
+		scoped.getItem('gettingTest');
+
+		expect(Storage.getItem).toHaveBeenCalledWith('scope-gettingTest');
+	});
+
+
+	test('removing', () => {
+		scoped.removeItem('removingTest');
+
+		expect(Storage.removeItem).toHaveBeenCalledWith('scope-removingTest');
+	});
+
+	test('sub-scoping', () => {
+		const sub = scoped.scope('sub');
+
+		sub.setItem('subSetting', 'bar');
+
+		expect(Storage.setItem).toHaveBeenCalledWith('sub:scope-subSetting', 'bar');
+	});
+});

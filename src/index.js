@@ -121,6 +121,19 @@ class Storage extends EventEmitter {
 		this.backer.clear();
 		this.onChange();
 	}
+
+
+	scope (scopedKey) {
+		const storage = this;
+		const getKey = key => `${scopedKey}-${key}`;
+
+		return {
+			getItem: (key) => storage.getItem(getKey(key)),
+			setItem: (key, value) => storage.setItem(getKey(key), value),
+			removeItem: (key) => storage.removeItem(getKey(key)),
+			scope: (key) => storage.scope(`${key}:${scopedKey}`)
+		};
+	}
 }
 
 export const LocalStorage = new Storage('localStorage');
