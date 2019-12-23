@@ -35,6 +35,7 @@
   },
   "homepage": "https://github.com/NextThought/nti.web.storage#readme",
   "devDependencies": {
+    "@nti/lib-commons": "^2.35.0",
     "@nti/lib-scripts": "^2.0.0"
   },
   "dependencies": {

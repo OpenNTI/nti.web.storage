@@ -1,7 +1,10 @@
 /* eslint-env jest */
+import {Date as DateUtils} from '@nti/lib-commons';
+
 import DefaultStorage, {LocalStorage, SessionStorage} from '../index';
 
 const Storage = DefaultStorage;
+const {MockDate} = DateUtils;
 
 afterEach(() =>{
 	Storage.removeAllListeners();
@@ -83,6 +86,46 @@ test('Removing a value', () => {
 	expect(Storage.getItem('foo')).toBe('bar');
 	Storage.removeItem('foo');
 	expect(Storage.getItem('foo')).toBeUndefined();
+});
+
+describe('expiry values', () => {
+	const mockDates = {
+		start: 'December 1, 2019 12:00:00',
+		expire: 'December 2, 2019 12:00:00',
+		after: 'December 3, 2019 12:00:00'
+	};
+
+	beforeEach(() => {
+		MockDate.install();
+	});
+
+	afterEach(() => {
+		MockDate.uninstall();
+	});
+
+	test('before expiration returns value', () => {
+		MockDate.setDestination(mockDates.start).hit88MPH();
+
+		const value = 'value';
+		const encoded = Storage.encodeExpiryValue(value, new Date(mockDates.expire));
+
+		const decoded = Storage.decodeExpiryValue(encoded);
+
+		expect(decoded).toBe(value);
+	});
+
+	test('after expiration returns null', () => {
+		MockDate.setDestination(mockDates.start).illBeBack();
+
+		const value = 'expired-value';
+		const encoded = Storage.encodeExpiryValue(value, new Date(mockDates.expire));
+
+		MockDate.setDestination(mockDates.after).hit88MPH();
+
+		const decoded = Storage.decodeExpiryValue(encoded);
+
+		expect(decoded).toBeNull();
+	});
 });
 
 describe('scoped', () => {

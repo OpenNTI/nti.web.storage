@@ -56,6 +56,28 @@ class MemoryStore {
 
 class Storage extends EventEmitter {
 
+	static encodeExpiryValue (value, expires) {
+		return JSON.stringify({
+			value,
+			expires
+		});
+	}
+
+	static decodeExpiryValue (encoded) {
+		try {
+			const decoded = JSON.parse(encoded);
+
+			const now = new Date();
+			const expire = new Date(decoded.expires);
+
+			if (expire >= now) { return decoded.value; }
+
+			return null;			
+		} catch (e) {
+			return null;
+		}
+	}
+
 	constructor (type) {
 		super();
 		let backer;
@@ -128,12 +150,18 @@ class Storage extends EventEmitter {
 		const getKey = key => `${scopedKey}-${key}`;
 
 		return {
+			encodeExpiryValue: (...args) => storage.encodeExpiryValue(...args),
+			decodeExpiryValue: (...args) => storage.decodeExpiryValue(...args),
 			getItem: (key) => storage.getItem(getKey(key)),
 			setItem: (key, value) => storage.setItem(getKey(key), value),
 			removeItem: (key) => storage.removeItem(getKey(key)),
 			scope: (key) => storage.scope(`${key}:${scopedKey}`)
 		};
 	}
+
+
+	encodeExpiryValue (...args) { return Storage.encodeExpiryValue(...args); }
+	decodeExpiryValue (...args) { return Storage.decodeExpiryValue(...args); }
 }
 
 export const LocalStorage = new Storage('localStorage');
