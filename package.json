@@ -2,10 +2,10 @@
   "name": "@nti/web-storage",
   "version": "1.6.0-alpha",
   "description": "(Session|Local)Storage Abstraction",
-  "main": "lib/index.js",
+  "main": ".index.js",
   "module": "src/index.js",
   "files": [
-    "lib",
+    ".index.js",
     "src"
   ],
   "publishConfig": {
@@ -14,12 +14,9 @@
   "scripts": {
     "test": "lib-scripts test",
     "start": "lib-scripts test --watch",
-    "prepack": "lib-scripts build",
-    "build": "lib-scripts build",
     "clean": "lib-scripts clean",
     "check": "lib-scripts check",
-    "release": "lib-scripts release",
-    "install-snapshots": "lib-scripts install-snapshots"
+    "release": "lib-scripts release"
   },
   "repository": {
     "type": "git",
@@ -35,10 +32,11 @@
   },
   "homepage": "https://github.com/NextThought/nti.web.storage#readme",
   "devDependencies": {
-    "@nti/lib-commons": "^2.35.0",
+    "@nti/lib-commons": "NextThought/nti.lib.commons",
     "@nti/lib-scripts": "^2.0.0"
   },
   "dependencies": {
-    "@nti/util-logger": "^1.1.1"
+    "@nti/util-logger": "NextThought/nti.util.logger",
+    "esm": "^3.2.25"
   }
 }

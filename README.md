@@ -1,5 +1,8 @@
 # nti.web.storage
 
+![Build Status](https://github.com/NextThought/nti.web.storage/workflows/Tests/badge.svg)
+
+
 ```bash
 npm install @nti/web-storage
 ```
