@@ -1,6 +1,6 @@
 # nti.web.storage
 
-![Build Status](https://github.com/NextThought/nti.web.storage/workflows/Tests/badge.svg)
+![Build Status](https://github.com/NextThought/nti.web.storage/workflows/Project%20Health/badge.svg)
 
 
 ```bash
