@@ -1,12 +1,12 @@
 /* eslint-env jest */
-import {Date as DateUtils} from '@nti/lib-commons';
+import { Date as DateUtils } from '@nti/lib-commons';
 
-import DefaultStorage, {LocalStorage, SessionStorage} from '../index';
+import DefaultStorage, { LocalStorage, SessionStorage } from '../index';
 
 const Storage = DefaultStorage;
-const {MockDate} = DateUtils;
+const { MockDate } = DateUtils;
 
-afterEach(() =>{
+afterEach(() => {
 	Storage.removeAllListeners();
 	Storage.clear();
 });
@@ -23,11 +23,9 @@ test('The default export should be LocalStorage', () => {
 	expect(DefaultStorage).toBe(LocalStorage);
 });
 
-
 test('Initial State: Length is 0', () => {
 	expect(Storage.length).toBe(0);
 });
-
 
 test('Length is accurate', () => {
 	expect(Storage.length).toBe(0);
@@ -35,14 +33,12 @@ test('Length is accurate', () => {
 	expect(Storage.length).toBe(1);
 });
 
-
 test('key()', () => {
 	expect(Storage.length).toBe(0);
 	Storage.setItem('foo', 'bar');
 	expect(Storage.length).toBe(1);
 	expect(Storage.key(0)).toBe('foo');
 });
-
 
 test('change fires', () => {
 	const handler = jest.fn();
@@ -57,7 +53,6 @@ test('change fires', () => {
 	expect(handler.mock.calls.length).toBe(3);
 });
 
-
 test('Clear clears', () => {
 	expect(Storage.length).toBe(0);
 	Storage.setItem('foo', 'baz');
@@ -66,12 +61,10 @@ test('Clear clears', () => {
 	expect(Storage.length).toBe(0);
 });
 
-
 test('Adding a value', () => {
 	Storage.setItem('foo', 'bar');
 	expect(Storage.getItem('foo')).toBe('bar');
 });
-
 
 test('Changing a value', () => {
 	Storage.setItem('foo', 'bar');
@@ -79,7 +72,6 @@ test('Changing a value', () => {
 	Storage.setItem('foo', 'baz');
 	expect(Storage.getItem('foo')).toBe('baz');
 });
-
 
 test('Removing a value', () => {
 	Storage.setItem('foo', 'bar');
@@ -92,7 +84,7 @@ describe('expiry values', () => {
 	const mockDates = {
 		start: 'December 1, 2019 12:00:00',
 		expire: 'December 2, 2019 12:00:00',
-		after: 'December 3, 2019 12:00:00'
+		after: 'December 3, 2019 12:00:00',
 	};
 
 	beforeEach(() => {
@@ -107,7 +99,10 @@ describe('expiry values', () => {
 		MockDate.setDestination(mockDates.start).hit88MPH();
 
 		const value = 'value';
-		const encoded = Storage.encodeExpiryValue(value, new Date(mockDates.expire));
+		const encoded = Storage.encodeExpiryValue(
+			value,
+			new Date(mockDates.expire)
+		);
 
 		const decoded = Storage.decodeExpiryValue(encoded);
 
@@ -118,7 +113,10 @@ describe('expiry values', () => {
 		MockDate.setDestination(mockDates.start).illBeBack();
 
 		const value = 'expired-value';
-		const encoded = Storage.encodeExpiryValue(value, new Date(mockDates.expire));
+		const encoded = Storage.encodeExpiryValue(
+			value,
+			new Date(mockDates.expire)
+		);
 
 		MockDate.setDestination(mockDates.after).hit88MPH();
 
@@ -137,10 +135,9 @@ describe('scoped', () => {
 		mocks = [
 			jest.spyOn(Storage, 'setItem').mockImplementation(() => {}),
 			jest.spyOn(Storage, 'getItem').mockImplementation(() => {}),
-			jest.spyOn(Storage, 'removeItem').mockImplementation(() => {})
+			jest.spyOn(Storage, 'removeItem').mockImplementation(() => {}),
 		];
 	});
-
 
 	afterEach(() => {
 		for (let mock of mocks) {
@@ -151,16 +148,17 @@ describe('scoped', () => {
 	test('setting', () => {
 		scoped.setItem('settingTest', 'bar');
 
-		expect(Storage.setItem).toHaveBeenCalledWith('scope-settingTest', 'bar');
+		expect(Storage.setItem).toHaveBeenCalledWith(
+			'scope-settingTest',
+			'bar'
+		);
 	});
-
 
 	test('getting', () => {
 		scoped.getItem('gettingTest');
 
 		expect(Storage.getItem).toHaveBeenCalledWith('scope-gettingTest');
 	});
-
 
 	test('removing', () => {
 		scoped.removeItem('removingTest');
@@ -173,6 +171,9 @@ describe('scoped', () => {
 
 		sub.setItem('subSetting', 'bar');
 
-		expect(Storage.setItem).toHaveBeenCalledWith('sub:scope-subSetting', 'bar');
+		expect(Storage.setItem).toHaveBeenCalledWith(
+			'sub:scope-subSetting',
+			'bar'
+		);
 	});
 });
