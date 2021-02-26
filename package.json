@@ -1,6 +1,6 @@
 {
   "name": "@nti/web-storage",
-  "version": "1.7.0",
+  "version": "1.8.0-alpha",
   "description": "(Session|Local)Storage Abstraction",
   "main": ".index.js",
   "module": "src/index.js",
