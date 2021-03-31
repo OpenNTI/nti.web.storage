@@ -2,12 +2,7 @@
   "name": "@nti/web-storage",
   "version": "1.8.0-alpha",
   "description": "(Session|Local)Storage Abstraction",
-  "main": ".index.js",
-  "module": "src/index.js",
-  "files": [
-    ".index.js",
-    "src"
-  ],
+  "main": "src/index.js",
   "publishConfig": {
     "registry": "https://npm.nextthought.com/"
   },
@@ -36,7 +31,6 @@
     "@nti/lib-scripts": "^2.0.0"
   },
   "dependencies": {
-    "@nti/util-logger": "NextThought/nti.util.logger",
-    "esm": "^3.2.25"
+    "@nti/util-logger": "NextThought/nti.util.logger"
   }
 }
